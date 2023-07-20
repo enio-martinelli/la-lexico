@@ -26,7 +26,23 @@ public class App {
 
             Token t = null;
             while ((t = lex.nextToken()).getType() != Token.EOF) {
-                System.out.println("<'" + t.getText() + "'," + LaLexer.VOCABULARY.getDisplayName(t.getType()) + ">");
+                String tnome = LaLexer.VOCABULARY.getDisplayName(t.getType());
+
+                switch(tnome){
+                    case "ERRO": 
+                        System.out.println("Linha "+t.getLine()+": "+t.getText()+" - simbolo nao identificado");
+                        break;
+                    case "ERRO_CADEIA":
+                        System.out.println("Linha "+t.getLine()+": cadeia literal nao fechada");
+                        break;
+                    case "ERRO_COMENTARIO":
+                        System.out.println("Linha "+t.getLine()+": comentario nao fechado");
+                        break;
+                    default:
+                        System.out.println("<'" + t.getText() + "'," + tnome + ">");
+                }
+
+                if(tnome.equals("ERRO") | tnome.equals("ERRO_CADEIA") | tnome.equals("ERRO_COMENTARIO")){break;}
             }
 
             // Fechar o arquivo após concluir a análise léxica
@@ -37,3 +53,4 @@ public class App {
         }
     }
 }
+

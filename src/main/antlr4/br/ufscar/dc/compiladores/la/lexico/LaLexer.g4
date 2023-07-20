@@ -40,17 +40,21 @@ FALSO: 'falso';
 VERDADEIRO: 'verdadeiro';
 
 
-NUMINT	: ('+'|'-')?('0'..'9')+;
+NUM_INT	: ('0'..'9')+;
 
-NUMREAL	: ('+'|'-')?('0'..'9')+ ('.' ('0'..'9')+)?;
+NUM_REAL	: ('0'..'9')+ ('.' ('0'..'9')+)?;
 
 IDENT : ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 
+WS  :   ( ' ' | '\t' | '\r' | '\n') {skip();};
+
 CADEIA 	: '"' (~('\n'))*? '"';
 
-COMENTARIO :   '{' ~('\n'|'\r')* '\r'? '}' {skip();};
+ERRO_CADEIA : '"' (~('\n'|'"'))*? '\n';
 
-WS  :   ( ' ' | '\t' | '\r' | '\n') {skip();};
+COMENTARIO :   '{' ~('\n'|'\r')*? '}' {skip();};
+
+ERRO_COMENTARIO: '{' ~('\n'|'}')*? '\n';
 
 //OP_REL	:	'>' | '>=' | '<' | '<=' | '<>' | '=';
 MAIOR: '>';
@@ -65,6 +69,7 @@ SOMA: '+';
 SUBTRACAO: '-';
 MULTIPLICACAO: '*';
 DIVICAO: '/';
+MOD: '%';
 
 DELIM	:	':';
 
@@ -82,6 +87,10 @@ ATRIBUICAO: '<-';
 
 ENDERECO: '&';
 
+INTERVALO: '..';
+
 PONTO: '.';
 
 PONTEIRO: '^';
+
+ERRO: .;

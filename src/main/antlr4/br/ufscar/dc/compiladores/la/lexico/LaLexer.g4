@@ -1,38 +1,87 @@
 lexer grammar LaLexer;
 
-PALAVRA_CHAVE 
-	:	'declare' | 'algoritmo' | 'inteiro' | 'real' | 'tipo' | 'var' | 'leia' | 'escreva' | 'se' | 'entao' 
-	| 'senao' | 'fim_se' | 'enquanto' | 'fim_enquanto' | 'fim_algoritmo' | 'e' | 'ou' | 'literal' | 'nao' 
-	| 'logico' | 'caso' | 'fim_caso' | 'seja' | 'para' | 'fim_para' | 'faca' | 'ate' | 'registro' | 'fim_registro' 
-	| 'procedimento' | 'fim_procedimento' | 'retorne' | 'funcao' | 'fim_funcao' | 'constante'| 'logico' | 'falso'
-	| 'verdadeiro'
-	; 
-NUMINT	: ('+'|'-')?('0'..'9')+
-	;
-NUMREAL	: ('+'|'-')?('0'..'9')+ ('.' ('0'..'9')+)?
-	;
-VARIAVEL : ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9')*
-	 ;
-CADEIA 	: '\'' ( ESC_SEQ | ~('\''|'\\') )* '\''
-	;
-fragment
-ESC_SEQ	: '\\\'';
-COMENTARIO
-    :   '%' ~('\n'|'\r')* '\r'? '\n' {skip();}
-    ;
-WS  :   ( ' '
-        | '\t'
-        | '\r'
-        | '\n'
-        ) {skip();}
-    ;
-OP_REL	:	'>' | '>=' | '<' | '<=' | '<>' | '='
-	;
-OP_ARIT	:	'+' | '-' | '*' | '/'
-	;
-DELIM	:	':'
-	;
-ABREPAR :	'('
-	;
-FECHAPAR:	')'
-	;
+//Palavras chave
+DECLARE: 'declare';
+ALGORITMO: 'algoritmo';
+INTEIRO: 'inteiro';
+REAL: 'real';
+TIPO: 'tipo';
+VAR: 'var';
+LEIA: 'leia';
+ESCREVA: 'escreva';
+SE: 'se';
+ENTAO: 'entao';
+SENAO: 'senao';
+FIM_SE: 'fim_se';
+ENQUANTO: 'enquanto';
+FIM_ENQUANTO: 'fim_enquanto';
+FIM_ALGORITMO: 'fim_algoritmo';
+E: 'e';
+OU: 'ou';
+LITERAL: 'literal';
+NAO: 'nao';
+LOGICO: 'logico';
+CASO: 'caso';
+FIM_CASO: 'fim_caso';
+SEJA: 'seja';
+PARA: 'para';
+FIM_PARA: 'fim_para';
+FACA: 'faca';
+ATE: 'ate';
+REGISTRO: 'registro';
+FIM_REGISTRO: 'fim_registro';
+PROCEDIMENTO: 'procedimento';
+FIM_PROCEDIMENTO: 'fim_procedimento';
+RETORNE: 'retorne';
+FUNCAO: 'funcao';
+FIM_FUNCAO: 'fim_funcao';
+CONSTANTE: 'constante';
+FALSO: 'falso';
+VERDADEIRO: 'verdadeiro';
+
+
+NUMINT	: ('+'|'-')?('0'..'9')+;
+
+NUMREAL	: ('+'|'-')?('0'..'9')+ ('.' ('0'..'9')+)?;
+
+IDENT : ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+
+CADEIA 	: '"' (~('\n'))*? '"';
+
+COMENTARIO :   '{' ~('\n'|'\r')* '\r'? '}' {skip();};
+
+WS  :   ( ' ' | '\t' | '\r' | '\n') {skip();};
+
+//OP_REL	:	'>' | '>=' | '<' | '<=' | '<>' | '=';
+MAIOR: '>';
+MAIORIGUAL: '>=';
+MENOR: '<';
+MENORIGUAL: '<=';
+DIFERENTE: '<>';
+IGUAL: '=';
+
+//OP_ARIT	:	'+' | '-' | '*' | '/';
+SOMA: '+';
+SUBTRACAO: '-';
+MULTIPLICACAO: '*';
+DIVICAO: '/';
+
+DELIM	:	':';
+
+ABREPAR :	'(';
+
+FECHAPAR:	')';
+
+ABRECAHVE: '[';
+
+FECHACHAVE: ']';
+
+VIRGULA	:	',';
+
+ATRIBUICAO: '<-';
+
+ENDERECO: '&';
+
+PONTO: '.';
+
+PONTEIRO: '^';

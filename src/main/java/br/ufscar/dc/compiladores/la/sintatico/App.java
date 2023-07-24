@@ -17,7 +17,7 @@ public class App {
             System.exit(1);
         }
 
-        Boolean erroLexico = false;
+        Boolean erroLexico = false; //Variável de controle para saber se houve erro léxico
 
         try {
             CharStream cs = CharStreams.fromFileName(args[0]);
@@ -55,25 +55,19 @@ public class App {
 
             //Comentar o bloco if abaixo para testar o t1
             if (!erroLexico) {
-            
-                cs = CharStreams.fromFileName(args[0]);
-                lex = new SintaticoLexer(cs);
-
-                fos = new FileOutputStream(args[1]);
-        
+                lex.reset();
                 CommonTokenStream tokens = new CommonTokenStream(lex);
                 SintaticoParser parser = new SintaticoParser(tokens);
         
-                // Adicionando nosso ErrorListener customizado
-                parser.removeErrorListeners();
-                MyCustomErrorListener mcel = new MyCustomErrorListener(fos);
-                parser.addErrorListener(mcel);
+                parser.removeErrorListeners(); // Remove o ErroListener padrão (default)
+                MyCustomErrorListener mcel = new MyCustomErrorListener(fos); 
+                parser.addErrorListener(mcel); // Adiciona o ErroListener customizado
         
                 parser.programa();
             }
 
-            System.out.println("Fim da compilacao");
-            // Fechar o arquivo após concluir a análise léxica
+            System.out.println("Fim da compilacao"); //Comentar para testar o t1
+            // Fechar o arquivo após concluir a análise sintática
             ps.close();
             fos.close();
         } catch (IOException ex) {

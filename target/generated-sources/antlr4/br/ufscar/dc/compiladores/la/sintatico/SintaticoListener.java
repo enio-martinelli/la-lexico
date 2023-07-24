@@ -28,15 +28,15 @@ public interface SintaticoListener extends ParseTreeListener {
 	 */
 	void exitDeclaracoes(SintaticoParser.DeclaracoesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SintaticoParser#declaracao_variaveis}.
+	 * Enter a parse tree produced by {@link SintaticoParser#declaracao_local}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeclaracao_variaveis(SintaticoParser.Declaracao_variaveisContext ctx);
+	void enterDeclaracao_local(SintaticoParser.Declaracao_localContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SintaticoParser#declaracao_variaveis}.
+	 * Exit a parse tree produced by {@link SintaticoParser#declaracao_local}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeclaracao_variaveis(SintaticoParser.Declaracao_variaveisContext ctx);
+	void exitDeclaracao_local(SintaticoParser.Declaracao_localContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SintaticoParser#variavel}.
 	 * @param ctx the parse tree
@@ -78,15 +78,15 @@ public interface SintaticoListener extends ParseTreeListener {
 	 */
 	void exitTipo_basico(SintaticoParser.Tipo_basicoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SintaticoParser#tipo_variavel}.
+	 * Enter a parse tree produced by {@link SintaticoParser#tipo_estendido}.
 	 * @param ctx the parse tree
 	 */
-	void enterTipo_variavel(SintaticoParser.Tipo_variavelContext ctx);
+	void enterTipo_estendido(SintaticoParser.Tipo_estendidoContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SintaticoParser#tipo_variavel}.
+	 * Exit a parse tree produced by {@link SintaticoParser#tipo_estendido}.
 	 * @param ctx the parse tree
 	 */
-	void exitTipo_variavel(SintaticoParser.Tipo_variavelContext ctx);
+	void exitTipo_estendido(SintaticoParser.Tipo_estendidoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SintaticoParser#valor_constante}.
 	 * @param ctx the parse tree
@@ -108,6 +108,16 @@ public interface SintaticoListener extends ParseTreeListener {
 	 */
 	void exitRegistro(SintaticoParser.RegistroContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SintaticoParser#declaracao_global}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaracao_global(SintaticoParser.Declaracao_globalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SintaticoParser#declaracao_global}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaracao_global(SintaticoParser.Declaracao_globalContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SintaticoParser#parametro}.
 	 * @param ctx the parse tree
 	 */
@@ -127,16 +137,6 @@ public interface SintaticoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParametros(SintaticoParser.ParametrosContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SintaticoParser#declaracao_funcoes}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclaracao_funcoes(SintaticoParser.Declaracao_funcoesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SintaticoParser#declaracao_funcoes}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclaracao_funcoes(SintaticoParser.Declaracao_funcoesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SintaticoParser#corpo}.
 	 * @param ctx the parse tree

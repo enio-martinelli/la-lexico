@@ -39,7 +39,7 @@ public class MyCustomErrorListener implements ANTLRErrorListener {
 
     @Override
     public void	syntaxError(Recognizer<?,?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
-        // Reportar apenas o primeiro erro, ignorar os outros
+        // Re
         if(!erroSintatico){
             Token t = (Token) offendingSymbol;
 
@@ -49,7 +49,6 @@ public class MyCustomErrorListener implements ANTLRErrorListener {
                 tText = "EOF";
             }
     
-            // Impressão do erro
             System.out.println("Linha "+line+": erro sintatico proximo a "+ tText);
             
             erroSintatico = true;

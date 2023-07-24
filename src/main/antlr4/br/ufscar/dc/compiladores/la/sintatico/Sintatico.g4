@@ -1,5 +1,6 @@
 grammar Sintatico;
 
+//ANALISADOR LEXICO
 //Palavras chave
 DECLARE: 'declare';
 ALGORITMO: 'algoritmo';
@@ -40,9 +41,9 @@ FALSO: 'falso';
 VERDADEIRO: 'verdadeiro';
 
 
-NUM_INT: ('0'..'9')+;
+NUM_INT: ('0'..'9')+; // Inteiros
 
-NUM_REAL: ('0'..'9')+ ('.' ('0'..'9')+)?;
+NUM_REAL: ('0'..'9')+ ('.' ('0'..'9')+)?; //Reais
 
 IDENT: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 
@@ -56,7 +57,7 @@ COMENTARIO:   '{' ~('\n'|'\r')*? '}' {skip();};
 
 ERRO_COMENTARIO: '{' ~('\n'|'}')*? '\n';
 
-//OP_REL	:	'>' | '>=' | '<' | '<=' | '<>' | '=';
+//OP_RELACIONAL	:	'>' | '>=' | '<' | '<=' | '<>' | '=';
 MAIOR: '>';
 MAIORIGUAL: '>=';
 MENOR: '<';
@@ -96,208 +97,94 @@ PONTEIRO: '^';
 ERRO: .;
 
 
+//ANALISADOR SINTATICO
 
-// Regra de definição do espaço do algorítmo, que se inicia após as declarações de variáveis.
-programa
-    : declaracoes 'algoritmo' corpo 'fim_algoritmo'
-    ;
+programa: declaracoes ALGORITMO corpo FIM_ALGORITMO;
 
-// Regra de definição dos diferentes tipos de declarações de variáveis e funções.
-declaracoes
-    : (declaracao_variaveis | declaracao_funcoes)*
-    ;
+declaracoes: (declaracao_local | declaracao_global)*;
 
-// Regra de declaração de variáveis.
-declaracao_variaveis
-    : 'declare' variavel 
-    | 'constante' IDENT ':' tipo_basico '=' valor_constante 
-    | 'tipo' IDENT ':' registro
-    ;
-variavel
-    : identificador (',' identificador)* ':' tipo
-    ;
+declaracao_local: DECLARE variavel | CONSTANTE IDENT ':' tipo_basico '=' valor_constante | TIPO IDENT ':' registro;
 
-// Regra de declaração de um vetor.
-identificador
-    : IDENT ('.' IDENT)* ('[' exp_aritmetica ']')*
-    ;
+variavel: identificador (',' identificador)* ':' tipo;
 
-// Regra de declaração de variáveis "complexas", como "estruturas" e "ponteiros".
-tipo
-    : registro 
-    | tipo_variavel
-    ;
+identificador: IDENT ('.' IDENT)* ('[' exp_aritmetica ']')*;
 
-// Regra de declaração dos tipos básicos de variáveis.
-tipo_basico
-    : LITERAL
-    | INTEIRO 
-    | REAL 
-    | LOGICO
-    ;
+tipo: registro | tipo_estendido;
 
-// Regra de declaração de um ponteiro.
-tipo_variavel
-    : '^'? (tipo_basico | IDENT)
-    ;
+tipo_basico: LITERAL | INTEIRO | REAL | LOGICO;
 
-// Regra de declaração de valores constantes.
-valor_constante
-    : CADEIA 
-    | NUM_INT 
-    | NUM_REAL 
-    | VERDADEIRO 
-    | FALSO
-    ;    
+tipo_estendido: '^'? (tipo_basico | IDENT);
 
-// Regra de declaração de "estrutura de dados".
-registro
-    : 'registro' variavel* 'fim_registro'
-    ;
+valor_constante: CADEIA | NUM_INT | NUM_REAL | VERDADEIRO | FALSO;    
 
-// Regra de declaração de parâmetros de uma função.
-parametro
-    : 'var'? identificador (',' identificador)* ':' tipo_variavel
-    ;
+registro: REGISTRO variavel* FIM_REGISTRO;
 
-parametros
-    : parametro (',' parametro)*
-    ;
+declaracao_global: PROCEDIMENTO IDENT '(' parametros? ')' declaracao_local* cmd* FIM_PROCEDIMENTO 
+    | FUNCAO IDENT '(' parametros? ')' ':' tipo_estendido declaracao_local* cmd* FIM_FUNCAO;
 
-// Regra de declaração de funções e procedimentos.
-declaracao_funcoes
-    : 'procedimento' IDENT '(' parametros? ')' declaracao_variaveis* cmd* 'fim_procedimento' 
-    | 'funcao' IDENT '(' parametros? ')' ':' tipo_variavel declaracao_variaveis* cmd* 'fim_funcao'
-    ;
+parametro: VAR? identificador (',' identificador)* ':' tipo_estendido;
 
-// Regra de definição do corpo de uma função ou procedimento.
-corpo
-    : declaracao_variaveis* cmd*
-    ;
+parametros: parametro (',' parametro)*;
 
-// Regras de definições de comandos da linguagem.
-cmd
-    : cmdLeia 
-    | cmdEscreva 
-    | cmdSe 
-    | cmdCaso 
-    | cmdPara 
-    | cmdEnquanto 
-    | cmdFaca 
-    | cmdAtribuicao 
-    | cmdChamada 
-    | cmdRetorne
-    ;
-cmdLeia
-    : 'leia' '(' '^'? identificador (',' '^'? identificador)* ')'
-    ;
-cmdEscreva
-    : 'escreva' '(' expressao (',' expressao)* ')'
-    ;
-cmdSe
-    : 'se' expressao 'entao' cmd* ('senao' cmd*)? 'fim_se'
-    ;
-cmdCaso
-    : 'caso' exp_aritmetica 'seja' selecao ('senao' cmd*)? 'fim_caso'
-    ;
-cmdPara
-    : 'para' IDENT '<-' exp_aritmetica 'ate' exp_aritmetica 'faca' cmd* 'fim_para'
-    ;
-cmdEnquanto
-    : 'enquanto' expressao 'faca' cmd* 'fim_enquanto'
-    ;
-cmdFaca
-    : 'faca' cmd* 'ate' expressao
-    ;
-cmdAtribuicao
-    : '^'? identificador '<-' expressao
-    ;
-cmdChamada
-    : IDENT '(' expressao (',' expressao)* ')'
-    ;
-cmdRetorne
-    : 'retorne' expressao
-    ;
+corpo: declaracao_local* cmd*;
 
-// Regras auxiliares para definição de seleção do valor para o comando "Caso".
-selecao
-    : item_selecao*
-    ;
-item_selecao
-    : constantes ':' cmd*
-    ;
-constantes
-    : numero_intervalo (',' numero_intervalo)*
-    ;
-numero_intervalo
-    : op_unario? NUM_INT ('..' op_unario? NUM_INT)?
-    ;
 
-// Regra para definir se o número da regra do comando "Caso" é negativo.
-op_unario
-    : '-'
-    ;
+// Comandos
+cmd: cmdLeia | cmdEscreva | cmdSe | cmdCaso | cmdPara | cmdEnquanto | cmdFaca | cmdAtribuicao | cmdChamada | cmdRetorne;
 
-// Regras de definição de operações aritméticas, separadas em grupo para definir a ordem de prioridades das operações.
-exp_aritmetica
-    : termo (op1 termo)*
-    ;
-termo
-    : fator (op2 fator)*
-    ;
-fator
-    : parcela (op3 parcela)*
-    ;
-op1
-    : '+' | '-'
-    ;
-op2
-    : '*' | '/'
-    ;
-op3
-    : '%'
-    ;
+cmdLeia: LEIA '(' '^'? identificador (',' '^'? identificador)* ')';
+cmdEscreva: ESCREVA '(' expressao (',' expressao)* ')';
+cmdSe: SE expressao ENTAO cmd* (SENAO cmd*)? FIM_SE;
+cmdCaso: CASO exp_aritmetica SEJA selecao (SENAO cmd*)? FIM_CASO;
+cmdPara: PARA IDENT '<-' exp_aritmetica ATE exp_aritmetica FACA cmd* FIM_PARA;
+cmdEnquanto: ENQUANTO expressao FACA cmd* FIM_ENQUANTO;
+cmdFaca: FACA cmd* ATE expressao;
+cmdAtribuicao: '^'? identificador '<-' expressao;
+cmdChamada: IDENT '(' expressao (',' expressao)* ')';
+cmdRetorne: RETORNE expressao;
 
-// Regras de definição de expressões aritméticas, com variáveis, ou números constantes. 
-parcela
-    : op_unario? parcela_unario | parcela_nao_unario
-    ;
-parcela_unario
-    : '^'? identificador
-	| IDENT '(' expressao (',' expressao)* ')'
-	| NUM_INT
-	| NUM_REAL
-	| '(' expressao ')'
-    ;
 
-// Regra de definição de recuperação do valor de um endereço da variável.
-parcela_nao_unario
-    : '&' identificador | CADEIA
-    ;
+selecao: item_selecao*;
 
-// Regras de definição de expressões relacionais.
-exp_relacional
-    : exp_aritmetica (op_relacional exp_aritmetica)?
-    ;
-op_relacional
-    : '=' | '<>' | '>=' | '<=' | '>' | '<'
-    ;
-expressao
-    : termo_logico (op_logico_1 termo_logico)*
-    ;
-termo_logico
-    : fator_logico (op_logico_2 fator_logico)*
-    ;
-fator_logico
-    : 'nao'? parcela_logica
-    ;
-parcela_logica
-    : ( 'verdadeiro' | 'falso' )
-	| exp_relacional
-    ;
-op_logico_1
-    : 'ou'
-    ;
-op_logico_2
-    : 'e'
-    ;
+item_selecao: constantes ':' cmd*;
+
+constantes: numero_intervalo (',' numero_intervalo)*;
+
+numero_intervalo: op_unario? NUM_INT ('..' op_unario? NUM_INT)?;
+
+op_unario: '-';
+
+// Expressões Aritméticas
+exp_aritmetica: termo (op1 termo)*;
+
+termo: fator (op2 fator)*;
+
+fator: parcela (op3 parcela)*;
+
+op1: '+' | '-';
+op2: '*' | '/';
+op3: '%';
+ 
+parcela: op_unario? parcela_unario | parcela_nao_unario;
+
+parcela_unario: '^'? identificador | IDENT '(' expressao (',' expressao)* ')' | NUM_INT | NUM_REAL | '(' expressao ')';
+
+parcela_nao_unario: '&' identificador | CADEIA;
+
+
+// Expressões relacionais
+exp_relacional: exp_aritmetica (op_relacional exp_aritmetica)?;
+
+op_relacional: '=' | '<>' | '>=' | '<=' | '>' | '<';
+
+expressao: termo_logico (op_logico_1 termo_logico)*;
+
+termo_logico: fator_logico (op_logico_2 fator_logico)*;
+
+fator_logico: NAO? parcela_logica;
+
+parcela_logica: ( VERDADEIRO | FALSO ) | exp_relacional;
+
+op_logico_1: OU;
+
+op_logico_2: E;

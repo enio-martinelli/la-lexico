@@ -41,13 +41,13 @@ public class SintaticoBaseListener implements SintaticoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclaracao_variaveis(SintaticoParser.Declaracao_variaveisContext ctx) { }
+	@Override public void enterDeclaracao_local(SintaticoParser.Declaracao_localContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclaracao_variaveis(SintaticoParser.Declaracao_variaveisContext ctx) { }
+	@Override public void exitDeclaracao_local(SintaticoParser.Declaracao_localContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -101,13 +101,13 @@ public class SintaticoBaseListener implements SintaticoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTipo_variavel(SintaticoParser.Tipo_variavelContext ctx) { }
+	@Override public void enterTipo_estendido(SintaticoParser.Tipo_estendidoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTipo_variavel(SintaticoParser.Tipo_variavelContext ctx) { }
+	@Override public void exitTipo_estendido(SintaticoParser.Tipo_estendidoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -137,6 +137,18 @@ public class SintaticoBaseListener implements SintaticoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclaracao_global(SintaticoParser.Declaracao_globalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaracao_global(SintaticoParser.Declaracao_globalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterParametro(SintaticoParser.ParametroContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -156,18 +168,6 @@ public class SintaticoBaseListener implements SintaticoListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitParametros(SintaticoParser.ParametrosContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeclaracao_funcoes(SintaticoParser.Declaracao_funcoesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclaracao_funcoes(SintaticoParser.Declaracao_funcoesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

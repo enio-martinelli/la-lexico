@@ -1,2 +1,12 @@
-C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-lexico\src\main\java\br\ufscar\dc\compiladores\la\lexico\App.java
-C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-lexico\target\generated-sources\antlr4\br\ufscar\dc\compiladores\la\lexico\LaLexer.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\src\main\java\br\ufscar\dc\compiladores\la\semantico\Escopos.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\src\main\java\br\ufscar\dc\compiladores\la\semantico\TabelaDeSimbolos.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\target\generated-sources\antlr4\br\ufscar\dc\compiladores\la\semantico\SemanticoBaseListener.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\src\main\java\br\ufscar\dc\compiladores\la\semantico\MyCustomErrorListener.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\target\generated-sources\antlr4\br\ufscar\dc\compiladores\la\semantico\SemanticoBaseVisitor.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\target\generated-sources\antlr4\br\ufscar\dc\compiladores\la\semantico\SemanticoListener.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\src\main\java\br\ufscar\dc\compiladores\la\semantico\App.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\target\generated-sources\antlr4\br\ufscar\dc\compiladores\la\semantico\SemanticoVisitor.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\target\generated-sources\antlr4\br\ufscar\dc\compiladores\la\semantico\SemanticoParser.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\src\main\java\br\ufscar\dc\compiladores\la\semantico\LaSemanticoUtils.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\target\generated-sources\antlr4\br\ufscar\dc\compiladores\la\semantico\SemanticoLexer.java
+C:\Users\eniom\Documents\Faculdade\7ºSEMESTRE\Compiladores\la-lexico\la-semantico\src\main\java\br\ufscar\dc\compiladores\la\semantico\LaSemantico.java

@@ -1,5 +1,5 @@
-# Construção de Compiladores T1
-## Implementação de um analisador léxico para a linguagem LA (Linguagem Algorítmica) desenvolvida pelo prof. Jander, no âmbito do DC/UFSCar
+# Construção de Compiladores T3
+## Implementação de parte de um analisador semântico para a linguagem LA (Linguagem Algorítmica) desenvolvida pelo prof. Jander, no âmbito do DC/UFSCar
 
 ## Informações do Aluno
 - Nome: Enio Martinelli
@@ -15,7 +15,7 @@ Isso criará um arquivo JAR executável na pasta `target` com as dependências n
 ## Execução do Programa
 Após a compilação, para executar o programa, utilize o seguinte comando:  
 ```
-java -jar target/la-lexico-1.0-SNAPSHOT-jar-with-dependencies.jar [arquivo_de_entrada.txt] [arquivo_de_saida.txt]
+java -jar target/la-semantico-1.0-SNAPSHOT-jar-with-dependencies.jar [arquivo_de_entrada.txt] [arquivo_de_saida.txt]
 ```  
 
 ## Testes Automáticos (fonte: [https://github.com/dlucredio/compiladores-corretor-automatico](https://github.com/dlucredio/compiladores-corretor-automatico))
@@ -27,7 +27,7 @@ Para executar os testes automáticos do compilador, siga os passos abaixo:
 
 3. Utilize o seguinte comando para executar os testes:  
    ```
-   java -jar teste/compiladores-corretor-automatico-1.0-SNAPSHOT-jar-with-dependencies.jar "java -jar [caminho_completo_para_o_executável.jar]" gcc teste/temp teste/casos-de-teste "790891" "t1"
+   java -jar teste/compiladores-corretor-automatico-1.0-SNAPSHOT-jar-with-dependencies.jar "java -jar [caminho_completo_para_o_executável.jar]" gcc teste/temp teste/casos-de-teste "790891" "t3"
    ```  
    
 Substitua `[caminho_completo_para_o_executável.jar]` pelo caminho completo para o arquivo JAR gerado na etapa de compilação.  

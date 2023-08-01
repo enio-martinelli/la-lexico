@@ -1,0 +1,18 @@
+identificador -> lado1
+
+identificador -> lado2
+
+identificador -> lado3
+
+identificador -> existeTriangulo
+
+identificador -> lado1
+
+identificador -> ehEquilatero
+
+identificador -> ehIsosceles
+
+identificador -> ehEscaleno
+
+Linha 7: identificador lado1 ja declarado anteriormente
+Fim da compilacao
